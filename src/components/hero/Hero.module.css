@@ -4,14 +4,15 @@
   --hero-subtle: rgb(255 255 255 / 42%);
   --hero-accent: var(--accent-hero);
   --hero-active-accent: var(--active-section-accent, var(--hero-accent));
-  --hero-transition-height: clamp(350px, 42svh, 500px);
-  --hero-dark-pause: clamp(120px, 16svh, 180px);
+  --hero-view-height: 94svh;
+  --hero-transition-height: clamp(260px, 34svh, 400px);
+  --hero-dark-pause: clamp(36px, 5svh, 54px);
 
   position: relative;
-  min-height: calc(100svh + var(--hero-dark-pause));
+  min-height: calc(var(--hero-view-height) + var(--hero-dark-pause));
   overflow: hidden;
   color: var(--hero-ink);
-  background: var(--sky-cerulean);
+  background: #050505;
   isolation: isolate;
 }
 
@@ -26,7 +27,7 @@
   right: -24px;
   left: -24px;
   z-index: -2;
-  height: calc(100svh + 48px);
+  height: calc(var(--hero-view-height) + 56px);
   isolation: isolate;
   transform-origin: center;
   will-change: transform;
@@ -53,7 +54,7 @@
 
 .transitionCloud {
   position: absolute;
-  top: calc(100svh - var(--hero-transition-height));
+  top: calc(var(--hero-view-height) - var(--hero-transition-height));
   right: -24px;
   left: -24px;
   z-index: -1;
@@ -86,12 +87,12 @@
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgb(5 5 5 / 5%) 15%,
-    rgb(5 5 5 / 15%) 30%,
-    rgb(5 5 5 / 30%) 45%,
-    rgb(5 5 5 / 55%) 60%,
-    rgb(5 5 5 / 75%) 75%,
-    rgb(5 5 5 / 95%) 90%,
+    rgb(5 5 5 / 4%) 12%,
+    rgb(5 5 5 / 12%) 26%,
+    rgb(5 5 5 / 28%) 42%,
+    rgb(5 5 5 / 52%) 58%,
+    rgb(5 5 5 / 74%) 74%,
+    rgb(5 5 5 / 92%) 90%,
     #050505 100%
   );
 }
@@ -199,14 +200,14 @@
   z-index: 1;
   display: flex;
   width: min(1280px, calc(100% - 96px));
-  min-height: 100svh;
+  min-height: var(--hero-view-height);
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  padding: 88px 0 96px;
+  padding: 88px 0 72px;
   text-align: center;
-  transform: translate3d(0, -30px, 0);
+  transform: translate3d(0, -18px, 0);
 }
 
 .kicker {
@@ -293,7 +294,7 @@
 .sideLabel {
   position: absolute;
   z-index: 2;
-  top: 50svh;
+  top: calc(var(--hero-view-height) * 0.5);
   color: rgb(255 255 255 / 30%);
   font-family: var(--font-jetbrains-mono), var(--font-mono);
   font-size: 11px;
@@ -312,7 +313,7 @@
 .sideLabelRight {
   top: auto;
   right: 48px;
-  bottom: calc(var(--hero-dark-pause) + 86px);
+  bottom: calc(var(--hero-dark-pause) + 66px);
   color: rgb(255 255 255 / 40%);
   opacity: 1;
   font-size: 12px;
@@ -328,7 +329,7 @@
 .bottomLabel {
   position: absolute;
   z-index: 2;
-  bottom: calc(var(--hero-dark-pause) + 48px);
+  bottom: calc(var(--hero-dark-pause) + 34px);
   color: var(--hero-subtle);
   font-family: var(--font-jetbrains-mono), var(--font-mono);
   font-size: 11px;
