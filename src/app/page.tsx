@@ -1,6 +1,5 @@
 import { SiteShell } from "@/components/layout/site-shell";
 import { SiteNavigation } from "@/components/navigation/site-navigation";
-import { SectionProgressNavigation } from "@/components/navigation/section-progress-navigation";
 import { AboutSection } from "@/components/sections/about/about-section";
 import { ExperienceSection } from "@/components/sections/experience/experience-section";
 import { FooterSection } from "@/components/sections/footer/footer-section";
@@ -11,7 +10,6 @@ export default function HomePage() {
   return (
     <SiteShell>
       <SiteNavigation />
-      <SectionProgressNavigation />
       <main>
         <HeroSection />
         <AboutSection />
