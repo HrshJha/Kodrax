@@ -8,7 +8,7 @@
   --contact-accent: var(--accent-contact);
 
   display: grid;
-  min-height: clamp(590px, 82svh, 760px);
+  min-height: clamp(540px, 72svh, 660px);
   place-items: center;
   color: var(--contact-foreground);
   background: var(--contact-background);
@@ -158,7 +158,7 @@
 
 @media (max-width: 767px) {
   .contact {
-    min-height: 78svh;
+    min-height: 68svh;
   }
 
   .inner {

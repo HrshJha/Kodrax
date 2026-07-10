@@ -9,11 +9,11 @@
 
   position: relative;
   display: grid;
-  min-height: clamp(160px, 24svh, 260px);
+  min-height: clamp(124px, 18svh, 190px);
   align-items: center;
   isolation: isolate;
   overflow: hidden;
-  padding: 0 clamp(24px, 6vw, 80px) clamp(48px, 7svh, 76px);
+  padding: 0 clamp(24px, 6vw, 80px) clamp(28px, 4svh, 48px);
   color: var(--footer-foreground);
   background: var(--footer-background);
 }
@@ -186,8 +186,8 @@
 
 @media (max-width: 767px) {
   .footer {
-    min-height: 180px;
-    padding: 0 20px 96px;
+    min-height: 132px;
+    padding: 0 20px 64px;
   }
 
   .heading {
@@ -223,7 +223,7 @@
   }
 
   .wordmarkFrame {
-    bottom: 54px;
+    bottom: 32px;
     width: 150vw;
   }
 
