@@ -4,9 +4,9 @@
   --hero-subtle: rgb(255 255 255 / 42%);
   --hero-accent: var(--accent-hero);
   --hero-active-accent: var(--active-section-accent, var(--hero-accent));
-  --hero-view-height: 94svh;
+  --hero-view-height: 92svh;
   --hero-transition-height: clamp(260px, 34svh, 400px);
-  --hero-dark-pause: clamp(36px, 5svh, 54px);
+  --hero-dark-pause: clamp(16px, 2.5svh, 24px);
 
   position: relative;
   min-height: calc(var(--hero-view-height) + var(--hero-dark-pause));
