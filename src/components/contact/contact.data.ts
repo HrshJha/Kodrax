@@ -8,18 +8,18 @@ export const contactLinks = [
     value: "jhaharsh451@gmail.com"
   },
   {
-    href: "https://github.com/HrshJha",
-    isExternal: true,
-    kind: "github",
-    label: "GitHub",
-    value: "github.com/HrshJha"
-  },
-  {
     href: "https://www.linkedin.com/in/hrshjha/",
     isExternal: true,
     kind: "linkedin",
     label: "LinkedIn",
     value: "linkedin.com/in/hrshjha"
+  },
+  {
+    href: "https://github.com/HrshJha",
+    isExternal: true,
+    kind: "github",
+    label: "GitHub",
+    value: "github.com/HrshJha"
   },
   {
     href: "#footer",
