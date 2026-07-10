@@ -9,6 +9,7 @@
   --projects-accent-rgb: var(--accent-projects-rgb);
   --project-content-height: clamp(430px, 56svh, 520px);
   --project-media-height: clamp(600px, 72svh, 740px);
+  --projects-right-navigation-clearance: clamp(220px, 13vw, 280px);
 
   position: relative;
   color: var(--projects-foreground);
@@ -30,9 +31,9 @@
   align-items: center;
   width: calc(
     100% - var(--global-progress-content-left) -
-      var(--global-progress-content-right)
+      var(--projects-right-navigation-clearance)
   );
-  margin-right: var(--global-progress-content-right);
+  margin-right: var(--projects-right-navigation-clearance);
   margin-left: var(--global-progress-content-left);
   padding: clamp(72px, 9svh, 96px) 0;
 }
@@ -485,8 +486,8 @@
   .stickyStage {
     grid-template-columns: minmax(0, 40fr) minmax(0, 60fr);
     gap: 44px;
-    width: calc(100% - 56px);
-    margin: 0 28px;
+    width: calc(100% - 28px - 220px);
+    margin: 0 220px 0 28px;
     padding: 96px 0 84px;
   }
 
