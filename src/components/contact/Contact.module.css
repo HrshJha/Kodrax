@@ -8,7 +8,7 @@
   --contact-accent: var(--accent-contact);
 
   display: grid;
-  min-height: clamp(620px, 80svh, 820px);
+  min-height: clamp(590px, 82svh, 760px);
   place-items: center;
   color: var(--contact-foreground);
   background: var(--contact-background);
@@ -19,7 +19,7 @@
   justify-items: center;
   width: min(720px, calc(100% - 80px));
   margin: 0 auto;
-  padding: clamp(96px, 12svh, 132px) 0 clamp(140px, 18svh, 180px);
+  padding: 0;
   text-align: center;
 }
 
@@ -34,10 +34,10 @@
 }
 
 .heading {
-  max-width: 12ch;
+  max-width: 720px;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(72px, 7.2vw, 96px);
+  font-size: clamp(72px, 5.6vw, 96px);
   font-weight: 700;
   line-height: 0.92;
   text-wrap: balance;
@@ -163,7 +163,7 @@
 
   .inner {
     width: min(100% - 40px, 520px);
-    padding: clamp(88px, 12svh, 112px) 0 clamp(112px, 16svh, 140px);
+    padding: 0;
   }
 
   .label {
