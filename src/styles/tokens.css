@@ -1,0 +1,100 @@
+@theme {
+  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+
+  --color-background: #050505;
+  --color-foreground: #f5f5f0;
+  --color-muted: rgb(245 245 240 / 64%);
+  --color-border: rgb(245 245 240 / 14%);
+  --color-focus: #f5f5f0;
+  --color-cloud-white: #f5f7fa;
+  --color-ink-navy: #0b1b2e;
+  --color-sky-cerulean: #1d5fa8;
+  --color-atmosphere-deep: #0a2a4d;
+  --color-sky-blue: #4fa8e8;
+
+  --breakpoint-mobile: 767px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-laptop: 1024px;
+  --breakpoint-desktop: 1280px;
+  --breakpoint-wide: 1600px;
+
+  --ease-standard: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-gentle: ease-in-out;
+  --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+:root {
+  color-scheme: dark;
+
+  --cloud-white: var(--color-cloud-white);
+  --cloud-white-rgb: 245 247 250;
+  --ink-navy: var(--color-ink-navy);
+  --ink-navy-rgb: 11 27 46;
+  --sky-cerulean: var(--color-sky-cerulean);
+  --sky-cerulean-rgb: 29 95 168;
+  --atmosphere-deep: var(--color-atmosphere-deep);
+  --atmosphere-deep-rgb: 10 42 77;
+
+  --accent-site: var(--color-sky-blue);
+  --accent-site-rgb: 79 168 232;
+  --accent-hero: var(--accent-site);
+  --accent-hero-rgb: var(--accent-site-rgb);
+  --accent-about: var(--accent-site);
+  --accent-about-rgb: var(--accent-site-rgb);
+  --accent-projects: var(--accent-site);
+  --accent-projects-rgb: var(--accent-site-rgb);
+  --accent-experience: var(--accent-site);
+  --accent-experience-rgb: var(--accent-site-rgb);
+  --accent-contact: var(--accent-site);
+  --accent-contact-rgb: var(--accent-site-rgb);
+
+  --active-section-accent: var(--accent-hero);
+  --active-section-accent-rgb: var(--accent-hero-rgb);
+
+  --global-progress-gutter-width: 180px;
+  --global-progress-gutter-left: 32px;
+  --global-progress-content-left: 240px;
+  --global-progress-content-right: 40px;
+
+  --duration-instant: 0ms;
+  --duration-xxs: 120ms;
+  --duration-xs: 180ms;
+  --duration-s: 280ms;
+  --duration-m: 420ms;
+  --duration-l: 650ms;
+  --duration-xl: 900ms;
+  --duration-xxl: 1200ms;
+  --duration-cinematic: 1600ms;
+
+  --delay-0: 0ms;
+  --delay-1: 60ms;
+  --delay-2: 120ms;
+  --delay-3: 180ms;
+  --delay-4: 240ms;
+  --delay-5: 300ms;
+
+  --opacity-hidden: 0;
+  --opacity-soft: 0.2;
+  --opacity-low: 0.35;
+  --opacity-medium: 0.6;
+  --opacity-high: 0.8;
+  --opacity-full: 1;
+
+  --scale-tiny: 0.95;
+  --scale-small: 0.98;
+  --scale-default: 1;
+  --scale-hover: 1.02;
+  --scale-focus: 1.04;
+
+  --rotation-small: 4deg;
+  --rotation-medium: 8deg;
+  --rotation-large: 12deg;
+
+  --blur-none: 0;
+  --blur-light: 4px;
+  --blur-medium: 8px;
+  --blur-heavy: 12px;
+}

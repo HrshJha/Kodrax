@@ -1,0 +1,41 @@
+.root {
+  --landing-reveal-scroll-distance: 924px;
+
+  position: relative;
+  min-height: calc(100svh + var(--landing-reveal-scroll-distance));
+  background: #050505;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background: #050505;
+  isolation: isolate;
+}
+
+.cloudLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #050505;
+}
+
+.cloudImage {
+  object-fit: cover;
+  object-position: 42% 50%;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: #050505;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 100% 100%;
+  will-change: opacity, mask-image;
+}

@@ -1,0 +1,132 @@
+.contact {
+  --contact-background: #050505;
+  --contact-foreground: var(--cloud-white);
+  --contact-muted: rgb(var(--cloud-white-rgb) / 68%);
+  --contact-subtle: rgb(var(--cloud-white-rgb) / 46%);
+  --contact-border: rgb(var(--cloud-white-rgb) / 12%);
+  --contact-hairline: rgb(var(--cloud-white-rgb) / 8%);
+
+  min-height: 100svh;
+  color: var(--contact-foreground);
+  background: var(--contact-background);
+}
+
+.inner {
+  display: grid;
+  width: min(700px, calc(100% - 80px));
+  min-height: 100svh;
+  align-content: center;
+  margin: 0 auto;
+  padding: 132px 0;
+}
+
+.heading {
+  max-width: 11ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(64px, 8vw, 112px);
+  font-weight: 520;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+.description {
+  max-width: 42ch;
+  margin: 36px 0 0;
+  color: var(--contact-muted);
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.links {
+  display: grid;
+  margin-top: 72px;
+  border-top: 1px solid var(--contact-hairline);
+}
+
+.linkMotion {
+  will-change: transform, opacity;
+}
+
+.linkRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 36px;
+  min-height: 68px;
+  align-items: center;
+  border-bottom: 1px solid var(--contact-hairline);
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--duration-xs) var(--ease-standard);
+}
+
+.linkRow::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: currentColor;
+  opacity: 0;
+  transition: opacity var(--duration-xs) var(--ease-standard);
+}
+
+.linkRow:hover,
+.linkRow:focus-visible {
+  opacity: 0.95;
+}
+
+.linkRow:hover::after,
+.linkRow:focus-visible::after {
+  opacity: 1;
+}
+
+.linkLabel {
+  color: var(--contact-subtle);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.linkValue {
+  overflow-wrap: anywhere;
+  color: var(--contact-muted);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+@media (max-width: 767px) {
+  .inner {
+    width: min(100% - 40px, 520px);
+    min-height: 100svh;
+    padding: clamp(80px, 12svh, 104px) 0;
+  }
+
+  .heading {
+    max-width: 10ch;
+    font-size: 48px;
+  }
+
+  .description {
+    margin-top: 28px;
+    font-size: 16px;
+  }
+
+  .links {
+    margin-top: 56px;
+  }
+
+  .linkRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    min-height: 76px;
+    align-content: center;
+  }
+
+  .linkValue {
+    font-size: 15px;
+  }
+}

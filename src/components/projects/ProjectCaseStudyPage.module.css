@@ -1,0 +1,595 @@
+.casePage {
+  --case-background: #050505;
+  --case-card-background: #0d1117;
+  --case-foreground: var(--cloud-white);
+  --case-muted: rgb(var(--cloud-white-rgb) / 70%);
+  --case-subtle: rgb(var(--cloud-white-rgb) / 48%);
+  --case-border: rgb(255 255 255 / 6%);
+  --case-accent: var(--accent-projects);
+  --case-accent-rgb: var(--accent-projects-rgb);
+
+  min-height: 100svh;
+  color: var(--case-foreground);
+  background: var(--case-background);
+}
+
+.caseStory {
+  display: grid;
+  gap: clamp(120px, 14vw, 180px);
+  width: min(1280px, calc(100% - 80px));
+  margin: 0 auto;
+  padding: clamp(96px, 12vw, 144px) 0 clamp(120px, 14vw, 180px);
+}
+
+.caseHero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+  gap: clamp(52px, 6vw, 88px);
+  align-items: center;
+  min-height: calc(100svh - 192px);
+}
+
+.caseHeroCopy {
+  display: grid;
+  align-content: center;
+  max-width: 660px;
+}
+
+.caseCategory {
+  margin: 0 0 24px;
+  color: var(--case-accent);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.caseTitle {
+  max-width: 10ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(72px, 8vw, 132px);
+  font-weight: 560;
+  letter-spacing: 0;
+  line-height: 0.86;
+  text-wrap: balance;
+}
+
+.caseSummary {
+  max-width: 34ch;
+  margin: clamp(32px, 4vw, 48px) 0 0;
+  color: var(--case-muted);
+  font-size: clamp(18px, 1.5vw, 23px);
+  line-height: 1.56;
+}
+
+.caseMetaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: clamp(42px, 5vw, 60px);
+}
+
+.caseMetaCard,
+.caseCard,
+.featureCard,
+.challengeCard,
+.techCard {
+  border: 1px solid var(--case-border);
+  border-radius: 20px;
+  background: var(--case-card-background);
+  transition:
+    border-color var(--duration-s) var(--ease-standard),
+    box-shadow var(--duration-s) var(--ease-standard),
+    transform var(--duration-s) var(--ease-standard);
+}
+
+.caseMetaCard {
+  display: grid;
+  min-height: 116px;
+  align-content: space-between;
+  padding: 18px;
+}
+
+.caseMetaCard span,
+.caseMetaCard strong,
+.selectedWorkTitle {
+  display: block;
+}
+
+.caseMetaCard span,
+.featureIcon,
+.pipelineStage span,
+.challengeCard > span {
+  color: var(--case-accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.caseMetaCard strong {
+  color: rgb(var(--cloud-white-rgb) / 88%);
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 500;
+  line-height: 1.28;
+}
+
+.caseGithubButton,
+.repositoryLink {
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+  min-height: 48px;
+  align-items: center;
+  margin-top: clamp(38px, 4.6vw, 56px);
+  color: var(--case-foreground);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.caseGithubButton::after,
+.repositoryLink::after {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: var(--case-accent);
+  opacity: 0.86;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-s) var(--ease-standard);
+}
+
+.caseGithubButton:hover::after,
+.caseGithubButton:focus-visible::after,
+.repositoryLink:hover::after,
+.repositoryLink:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.caseHeroMedia {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--case-border);
+  border-radius: 24px;
+  background: #050505;
+  box-shadow: 0 34px 92px rgb(0 0 0 / 32%);
+  isolation: isolate;
+}
+
+.caseHeroVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #050505;
+  transform: scale(1);
+  transition: transform var(--duration-xxl) var(--ease-smooth);
+}
+
+.caseHeroMedia:hover .caseHeroVideo {
+  transform: scale(1.03);
+}
+
+.caseSection {
+  display: grid;
+  gap: clamp(44px, 5vw, 72px);
+}
+
+.caseSectionTitle {
+  max-width: 11ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5.4vw, 84px);
+  font-weight: 540;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+.splitSection {
+  grid-template-columns: minmax(240px, 0.34fr) minmax(0, 0.66fr);
+  align-items: start;
+}
+
+.caseCard p,
+.pipelineStage p,
+.featureCard p,
+.challengeCard p,
+.techCard p {
+  margin: 0;
+  color: var(--case-muted);
+  font-size: 16px;
+  line-height: 1.68;
+}
+
+.cardGrid,
+.featureGrid,
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.cardGridTwo {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.caseCard {
+  display: grid;
+  min-height: 230px;
+  align-content: space-between;
+  padding: clamp(24px, 2.7vw, 34px);
+}
+
+.caseCard:hover,
+.featureCard:hover,
+.challengeCard:hover,
+.techCard:hover,
+.pipelineStage:hover {
+  border-color: var(--case-accent);
+  box-shadow: 0 20px 54px rgb(0 0 0 / 28%);
+  transform: translate3d(0, -6px, 0);
+}
+
+.caseCard h3,
+.pipelineStage h3,
+.challengeCard h3,
+.techCard h3 {
+  margin: 0;
+  color: var(--case-foreground);
+  font-size: clamp(21px, 1.8vw, 28px);
+  font-weight: 520;
+  line-height: 1.08;
+}
+
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  list-style: none;
+  scrollbar-width: none;
+}
+
+.pipeline::-webkit-scrollbar {
+  display: none;
+}
+
+.pipelineStage {
+  position: relative;
+  display: grid;
+  min-height: 300px;
+  align-content: start;
+  gap: 22px;
+  border: 1px solid var(--case-border);
+  border-radius: 20px;
+  padding: 26px;
+  background: var(--case-card-background);
+  transition:
+    border-color var(--duration-s) var(--ease-standard),
+    box-shadow var(--duration-s) var(--ease-standard),
+    transform var(--duration-s) var(--ease-standard);
+}
+
+.pipelineStage::after {
+  position: absolute;
+  top: 39px;
+  right: -16px;
+  width: 16px;
+  height: 1px;
+  content: "";
+  background: rgb(var(--case-accent-rgb) / 36%);
+}
+
+.pipelineStage:last-child::after {
+  display: none;
+}
+
+.implementationNotes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.implementationNotes p {
+  margin: 0;
+  border: 1px solid rgb(255 255 255 / 5%);
+  border-radius: 999px;
+  padding: 10px 13px;
+  color: var(--case-subtle);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.featureGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.featureCard {
+  display: grid;
+  min-height: 220px;
+  align-content: space-between;
+  padding: clamp(22px, 2.5vw, 30px);
+}
+
+.featureIcon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgb(var(--case-accent-rgb) / 32%);
+  border-radius: 50%;
+}
+
+.challengeTimeline {
+  position: relative;
+  display: grid;
+  gap: 24px;
+  max-width: 980px;
+}
+
+.challengeTimeline::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 18px;
+  width: 1px;
+  content: "";
+  background: rgb(255 255 255 / 8%);
+}
+
+.challengeCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 0.46fr) minmax(0, 0.54fr);
+  gap: clamp(22px, 2.6vw, 34px);
+  align-items: start;
+  padding: clamp(22px, 2.6vw, 32px);
+}
+
+.challengeCard > span {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid rgb(var(--case-accent-rgb) / 34%);
+  border-radius: 50%;
+  background: var(--case-card-background);
+}
+
+.challengeCard h3 {
+  margin-bottom: 12px;
+  color: var(--case-accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.learningList {
+  display: grid;
+  gap: clamp(28px, 3.8vw, 48px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.learningList li {
+  max-width: 18ch;
+  color: rgb(var(--cloud-white-rgb) / 88%);
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.2vw, 82px);
+  font-weight: 520;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.learningList li:nth-child(even) {
+  margin-left: auto;
+  text-align: right;
+}
+
+.techGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.techCard {
+  display: grid;
+  min-height: 190px;
+  align-content: space-between;
+  padding: clamp(22px, 2.5vw, 30px);
+}
+
+.techCard p {
+  color: var(--case-subtle);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.repositorySection {
+  min-height: 48svh;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.repositorySection .caseSectionTitle {
+  max-width: none;
+}
+
+.repositoryLink {
+  margin-top: 0;
+  color: var(--case-accent);
+  font-size: clamp(18px, 2vw, 28px);
+  text-transform: none;
+}
+
+@media (max-width: 1023px) {
+  .caseStory {
+    width: min(100% - 56px, 900px);
+  }
+
+  .caseHero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .caseHeroCopy {
+    max-width: 760px;
+  }
+
+  .caseTitle {
+    font-size: clamp(64px, 11vw, 104px);
+  }
+
+  .caseHeroMedia {
+    aspect-ratio: 16 / 9;
+  }
+
+  .splitSection {
+    grid-template-columns: 1fr;
+  }
+
+  .cardGrid,
+  .featureGrid,
+  .techGrid,
+  .cardGridTwo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .challengeCard {
+    grid-template-columns: 36px minmax(0, 1fr);
+  }
+
+  .challengeCard > div:last-child {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .caseStory {
+    gap: 112px;
+    width: calc(100% - 40px);
+    padding: 88px 0 120px;
+  }
+
+  .caseCategory {
+    margin-bottom: 18px;
+    font-size: 11px;
+  }
+
+  .caseTitle {
+    max-width: none;
+    font-size: clamp(46px, 15vw, 64px);
+    line-height: 0.92;
+  }
+
+  .caseSummary {
+    max-width: none;
+    margin-top: 28px;
+    font-size: 17px;
+  }
+
+  .caseMetaGrid,
+  .cardGrid,
+  .featureGrid,
+  .techGrid,
+  .cardGridTwo {
+    grid-template-columns: 1fr;
+  }
+
+  .caseHeroMedia {
+    border-radius: 18px;
+  }
+
+  .caseSection {
+    gap: 32px;
+  }
+
+  .caseSectionTitle {
+    max-width: none;
+    font-size: clamp(38px, 12vw, 52px);
+  }
+
+  .caseCard,
+  .featureCard,
+  .techCard {
+    min-height: 0;
+  }
+
+  .pipeline {
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+
+  .pipelineStage {
+    min-height: 0;
+  }
+
+  .pipelineStage::after {
+    top: auto;
+    right: auto;
+    bottom: -16px;
+    left: 38px;
+    width: 1px;
+    height: 16px;
+  }
+
+  .challengeTimeline::before {
+    left: 16px;
+  }
+
+  .challengeCard {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 18px;
+    padding: 20px;
+  }
+
+  .challengeCard > span {
+    width: 32px;
+    height: 32px;
+  }
+
+  .learningList li,
+  .learningList li:nth-child(even) {
+    max-width: none;
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caseHeroVideo,
+  .caseMetaCard,
+  .caseCard,
+  .featureCard,
+  .challengeCard,
+  .techCard,
+  .pipelineStage {
+    transition: none;
+  }
+
+  .caseHeroMedia:hover .caseHeroVideo,
+  .caseCard:hover,
+  .featureCard:hover,
+  .challengeCard:hover,
+  .techCard:hover,
+  .pipelineStage:hover {
+    transform: none;
+  }
+}
