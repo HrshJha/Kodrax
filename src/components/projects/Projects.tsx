@@ -4,12 +4,12 @@ import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
   useTransform
 } from "framer-motion";
 import { type CSSProperties, useEffect, useRef, useState } from "react";
 
+import { usePrefersReducedMotion } from "@/components/motion/reveal";
 import { ProjectContent } from "@/components/projects/ProjectContent";
 import { ProjectMedia } from "@/components/projects/ProjectMedia";
 import { ProjectTimeline } from "@/components/projects/ProjectTimeline";
@@ -99,8 +99,14 @@ function MobileProject({
 
 export function Projects({ className }: Readonly<ProjectsProps>) {
   const sectionRef = useRef<HTMLElement>(null);
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
+  const transitionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
+  const transitionActiveRef = useRef(false);
+  const pendingIndexRef = useRef<number | null>(null);
+  const activeIndexRef = useRef(0);
   const activeProject = projects[activeIndex] ?? projects[0]!;
 
   const { scrollYProgress } = useScroll({
@@ -109,16 +115,62 @@ export function Projects({ className }: Readonly<ProjectsProps>) {
   });
   const timelineProgress = useTransform(scrollYProgress, clampProgress);
 
+  function beginProjectTransition(nextActiveIndex: number) {
+    if (nextActiveIndex === activeIndexRef.current) {
+      return;
+    }
+
+    activeIndexRef.current = nextActiveIndex;
+    setActiveIndex(nextActiveIndex);
+
+    if (shouldReduceMotion) {
+      return;
+    }
+
+    transitionActiveRef.current = true;
+
+    if (transitionTimeoutRef.current) {
+      clearTimeout(transitionTimeoutRef.current);
+    }
+
+    transitionTimeoutRef.current = setTimeout(() => {
+      transitionActiveRef.current = false;
+
+      const pendingIndex = pendingIndexRef.current;
+      pendingIndexRef.current = null;
+
+      if (
+        pendingIndex !== null &&
+        pendingIndex !== activeIndexRef.current
+      ) {
+        beginProjectTransition(pendingIndex);
+      }
+    }, PROJECT_MOTION.crossfadeDuration * 1000);
+  }
+
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const progress = clampProgress(latest);
     const nextActiveIndex = getActiveIndex(progress, projects.length);
 
-    setActiveIndex((currentActiveIndex) =>
-      currentActiveIndex === nextActiveIndex
-        ? currentActiveIndex
-        : nextActiveIndex
-    );
+    if (nextActiveIndex === activeIndexRef.current) {
+      return;
+    }
+
+    if (transitionActiveRef.current) {
+      pendingIndexRef.current = nextActiveIndex;
+      return;
+    }
+
+    beginProjectTransition(nextActiveIndex);
   });
+
+  useEffect(() => {
+    return () => {
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section
@@ -139,9 +191,12 @@ export function Projects({ className }: Readonly<ProjectsProps>) {
           <div className={styles.leftColumn}>
             <ProjectTimeline
               activeIndex={activeIndex}
-              progress={timelineProgress}
+              progress={
+                shouldReduceMotion
+                  ? activeIndex / Math.max(projects.length - 1, 1)
+                  : timelineProgress
+              }
               projects={projects}
-              reduceMotion={Boolean(shouldReduceMotion)}
             />
             <div className={styles.contentSlot}>
               <h2 className={styles.visuallyHidden} id="projects-heading">
@@ -149,10 +204,10 @@ export function Projects({ className }: Readonly<ProjectsProps>) {
               </h2>
               <AnimatePresence initial={false} mode="sync">
                 <motion.div
-                  animate={{ opacity: 1 }}
+                  animate={{ opacity: 1, y: 0 }}
                   className={styles.contentPanel}
-                  exit={{ opacity: 0 }}
-                  initial={{ opacity: shouldReduceMotion ? 1 : 0 }}
+                  exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -12 }}
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
                   key={activeProject.slug}
                   transition={{
                     duration: shouldReduceMotion
@@ -167,7 +222,11 @@ export function Projects({ className }: Readonly<ProjectsProps>) {
             </div>
           </div>
 
-          <ProjectMedia activeIndex={activeIndex} projects={projects} />
+          <ProjectMedia
+            activeIndex={activeIndex}
+            projects={projects}
+            reduceMotion={shouldReduceMotion}
+          />
         </div>
       </div>
 

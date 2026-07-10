@@ -1,18 +1,11 @@
 "use client";
 
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useTransform
-} from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import type { PointerEvent } from "react";
 
 import {
   ABOUT_EDUCATION,
   ABOUT_EYEBROW,
-  ABOUT_MOTION,
   ABOUT_NAME,
   ABOUT_PORTRAIT_ALT,
   ABOUT_PORTRAIT_SRC,
@@ -21,106 +14,39 @@ import {
   ABOUT_TECH_STACK
 } from "@/components/about/About.constants";
 import type { AboutProps } from "@/components/about/About.types";
+import { Reveal, revealChildVariants } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 import styles from "./About.module.css";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 }
-} as const;
-
-const portraitReveal = {
-  hidden: { opacity: 0, scale: 0.98 },
-  visible: { opacity: 1, scale: 1 }
-} as const;
-
-const contentStack = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: ABOUT_MOTION.delayStep
-    }
-  }
-} as const;
-
-const contentBlock = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 }
-} as const;
-
 export function About({ className }: Readonly<AboutProps>) {
-  const shouldReduceMotion = useReducedMotion();
-  const initialState = shouldReduceMotion ? "visible" : "hidden";
-  const viewport = { amount: 0.28, once: true };
-  const pointerX = useMotionValue(0.5);
-  const pointerY = useMotionValue(0.5);
-  const portraitX = useTransform(pointerX, [0, 1], [-4, 4]);
-  const portraitY = useTransform(pointerY, [0, 1], [-3, 3]);
-
-  function handlePortraitPointerMove(event: PointerEvent<HTMLDivElement>) {
-    if (shouldReduceMotion) {
-      return;
-    }
-
-    const bounds = event.currentTarget.getBoundingClientRect();
-    pointerX.set((event.clientX - bounds.left) / bounds.width);
-    pointerY.set((event.clientY - bounds.top) / bounds.height);
-  }
-
-  function handlePortraitPointerLeave() {
-    pointerX.set(0.5);
-    pointerY.set(0.5);
-  }
-
   return (
-    <motion.section
+    <Reveal
+      amount={0.2}
       aria-labelledby="about-heading"
+      as="section"
       className={cn(styles.about, className)}
+      duration="M"
+      ease="primary"
       id="about"
-      initial={initialState}
-      transition={{
-        duration: ABOUT_MOTION.duration,
-        ease: ABOUT_MOTION.easeOutCubic
-      }}
-      variants={fadeUp}
-      viewport={viewport}
-      whileInView="visible"
+      translate="medium"
     >
       <div className={styles.inner}>
-        <motion.div
+        <Reveal
+          amount={0.2}
+          as="div"
           className={styles.visualCanvas}
-          initial={initialState}
-          onPointerLeave={handlePortraitPointerLeave}
-          onPointerMove={handlePortraitPointerMove}
-          transition={{
-            duration: ABOUT_MOTION.duration,
-            ease: ABOUT_MOTION.easeOutCubic
-          }}
-          variants={portraitReveal}
-          viewport={viewport}
-          whileInView="visible"
+          duration="M"
+          ease="primary"
+          scale
+          translate="none"
         >
-          <motion.p
+          <p
             className={styles.visualKicker}
-            initial={initialState}
-            transition={{
-              delay: ABOUT_MOTION.delayStep,
-              duration: ABOUT_MOTION.duration,
-              ease: ABOUT_MOTION.easeOutCubic
-            }}
-            variants={contentBlock}
-            viewport={viewport}
-            whileInView="visible"
           >
             {ABOUT_EYEBROW}
-          </motion.p>
-          <motion.div
-            className={styles.portraitParallax}
-            style={
-              shouldReduceMotion ? undefined : { x: portraitX, y: portraitY }
-            }
-          >
+          </p>
+          <div className={styles.portraitParallax}>
             <div className={styles.portraitDrift}>
               <Image
                 alt={ABOUT_PORTRAIT_ALT}
@@ -131,36 +57,36 @@ export function About({ className }: Readonly<AboutProps>) {
                 src={ABOUT_PORTRAIT_SRC}
               />
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </Reveal>
 
-        <motion.div
+        <Reveal
+          amount={0.2}
+          as="div"
           className={styles.content}
-          initial={initialState}
-          transition={{
-            delay: ABOUT_MOTION.delayStep * 2,
-            duration: ABOUT_MOTION.duration,
-            ease: ABOUT_MOTION.easeOutCubic
-          }}
-          variants={contentStack}
-          viewport={viewport}
-          whileInView="visible"
+          duration="S"
+          ease="primary"
+          staggerChildren="D1"
+          translate="small"
         >
-          <motion.div className={styles.identity} variants={contentBlock}>
+          <motion.div
+            className={styles.identity}
+            variants={revealChildVariants}
+          >
             <h2 className={styles.name} id="about-heading">
               {ABOUT_NAME}
             </h2>
             <p className={styles.roleTag}>{ABOUT_ROLE_TAG}</p>
           </motion.div>
 
-          <motion.p className={styles.summary} variants={contentBlock}>
+          <motion.p className={styles.summary} variants={revealChildVariants}>
             {ABOUT_SUMMARY}
           </motion.p>
 
           <motion.section
             aria-label="Skills"
             className={styles.skills}
-            variants={contentBlock}
+            variants={revealChildVariants}
           >
             {ABOUT_TECH_STACK.map((group) => (
               <div className={styles.skillRow} key={group.label}>
@@ -176,12 +102,15 @@ export function About({ className }: Readonly<AboutProps>) {
             ))}
           </motion.section>
 
-          <motion.p className={styles.educationLine} variants={contentBlock}>
+          <motion.p
+            className={styles.educationLine}
+            variants={revealChildVariants}
+          >
             {ABOUT_EDUCATION.institution} · {ABOUT_EDUCATION.degree} ·{" "}
             {ABOUT_EDUCATION.expectedGraduation} · {ABOUT_EDUCATION.cgpa}
           </motion.p>
-        </motion.div>
+        </Reveal>
       </div>
-    </motion.section>
+    </Reveal>
   );
 }

@@ -5,7 +5,7 @@ export const FOOTER_SECTION_ID = "footer";
 export const FOOTER_HOME_TARGET_ID = "home";
 
 export const FOOTER_WORDMARK_PATTERN =
-  "HARSH JHA • ENGINEER • HARSH JHA • BUILDER • HARSH JHA • ENGINEER • HARSH JHA • BUILDER •";
+  "HARSH JHA, HARSH JHA, HARSH JHA, HARSH JHA, HARSH JHA, HARSH JHA,";
 
 export const FOOTER_HEADING = "Let's Build Something Meaningful.";
 
@@ -42,6 +42,6 @@ export const FOOTER_MOTION = {
   contentTranslateY: 16,
   delayStep: 0.08,
   easeOutCubic: [0.33, 1, 0.68, 1],
-  wordmarkDuration: 1.2,
-  wordmarkOpacity: 0.075
+  wordmarkDuration: 50,
+  wordmarkOpacity: 0.04
 } as const;

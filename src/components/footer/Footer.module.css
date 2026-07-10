@@ -27,7 +27,6 @@
   width: min(600px, 100%);
   margin: 0 auto;
   text-align: center;
-  will-change: transform, opacity;
 }
 
 .heading {
@@ -139,16 +138,16 @@
   font-weight: 650;
   line-height: 0.78;
   color: var(--footer-foreground);
+  opacity: 0.04;
   white-space: nowrap;
   user-select: none;
   mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
-  will-change: opacity;
 }
 
 .wordmarkTrack {
   display: flex;
   width: max-content;
-  animation: footer-wordmark-marquee 52s linear infinite;
+  animation: footer-wordmark-marquee 50s linear infinite;
   will-change: transform;
 }
 

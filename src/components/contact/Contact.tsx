@@ -1,94 +1,61 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { ContactLink } from "@/components/contact/ContactLink";
 import {
   CONTACT_DESCRIPTION,
   CONTACT_HEADING,
-  CONTACT_MOTION,
   CONTACT_SECTION_ID
 } from "@/components/contact/contact.constants";
 import { contactLinks } from "@/components/contact/contact.data";
 import type { ContactProps } from "@/components/contact/contact.types";
+import { Reveal, revealChildVariants } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 import styles from "./Contact.module.css";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: CONTACT_MOTION.translateY },
-  visible: { opacity: 1, y: 0 }
-} as const;
-
-const linkList = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: CONTACT_MOTION.delayStep
-    }
-  }
-} as const;
-
 export function Contact({ className }: Readonly<ContactProps>) {
-  const shouldReduceMotion = useReducedMotion();
-  const initialState = shouldReduceMotion ? "visible" : "hidden";
-  const transition = {
-    duration: shouldReduceMotion ? 0 : CONTACT_MOTION.duration,
-    ease: CONTACT_MOTION.easeOutCubic
-  };
-
   return (
-    <section
+    <Reveal
+      amount={0.2}
       aria-labelledby="contact-heading"
+      as="section"
       className={cn(styles.contact, className)}
+      duration="M"
+      ease="primary"
       id={CONTACT_SECTION_ID}
+      translate="medium"
     >
       <div className={styles.inner}>
-        <motion.h2
-          className={styles.heading}
-          id="contact-heading"
-          initial={initialState}
-          transition={transition}
-          variants={fadeUp}
-          viewport={{ amount: 0.35, once: true }}
-          whileInView="visible"
-        >
+        <h2 className={styles.heading} id="contact-heading">
           {CONTACT_HEADING}
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          className={styles.description}
-          initial={initialState}
-          transition={{
-            ...transition,
-            delay: shouldReduceMotion ? 0 : CONTACT_MOTION.delayStep
-          }}
-          variants={fadeUp}
-          viewport={{ amount: 0.35, once: true }}
-          whileInView="visible"
-        >
+        <p className={styles.description}>
           {CONTACT_DESCRIPTION}
-        </motion.p>
+        </p>
 
-        <motion.div
+        <Reveal
+          amount={0.2}
+          as="div"
           className={styles.links}
-          initial={initialState}
-          variants={linkList}
-          viewport={{ amount: 0.3, once: true }}
-          whileInView="visible"
+          duration="S"
+          ease="primary"
+          staggerChildren="D1"
+          translate="small"
         >
           {contactLinks.map((link) => (
             <motion.div
               className={styles.linkMotion}
               key={link.kind}
-              transition={transition}
-              variants={fadeUp}
+              variants={revealChildVariants}
             >
               <ContactLink link={link} />
             </motion.div>
           ))}
-        </motion.div>
+        </Reveal>
       </div>
-    </section>
+    </Reveal>
   );
 }

@@ -11,7 +11,3 @@ export interface FooterLinkItem {
 export interface FooterProps {
   readonly className?: string;
 }
-
-export interface FooterLinksProps {
-  readonly shouldReduceMotion: boolean;
-}

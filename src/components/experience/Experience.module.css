@@ -8,7 +8,7 @@
   --experience-accent-rgb: var(--accent-experience-rgb);
 
   position: relative;
-  min-height: var(--experience-scroll-height);
+  min-height: 100svh;
   color: var(--experience-foreground);
   background: var(--experience-background);
 }
@@ -18,25 +18,24 @@
 }
 
 .stage {
-  position: sticky;
-  top: 0;
   display: grid;
   min-height: 100svh;
   align-items: center;
   overflow: hidden;
-  padding: clamp(52px, 6svh, 76px) 48px;
+  padding: clamp(80px, 10svh, 128px) 48px;
 }
 
 .stack {
-  position: relative;
+  display: grid;
+  gap: clamp(96px, 14svh, 156px);
   width: 100%;
-  height: clamp(700px, 92svh, 940px);
+  max-width: 1952px;
+  margin: 0 auto;
 }
 
 .chapterMotion {
-  position: absolute;
-  inset: 0;
-  will-change: transform, opacity;
+  transform-origin: center;
+  will-change: transform;
 }
 
 .card {
@@ -54,7 +53,24 @@
   align-content: center;
   max-width: 56ch;
   min-height: 0;
-  will-change: transform, opacity;
+}
+
+.experienceTimeline {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1952px;
+  height: 1px;
+  margin: 0 auto clamp(54px, 7svh, 84px);
+  overflow: hidden;
+  background: rgb(var(--cloud-white-rgb) / 8%);
+}
+
+.experienceTimelineFill {
+  width: 100%;
+  height: 100%;
+  background: rgb(var(--experience-accent-rgb) / 74%);
+  transform-origin: left;
 }
 
 .selectedWorkTitle {
@@ -191,11 +207,11 @@
 
 @media (max-width: 1023px) {
   .stage {
-    padding: 64px 24px;
+    padding: 80px 24px;
   }
 
   .stack {
-    height: clamp(660px, 90svh, 840px);
+    gap: 96px;
   }
 
   .card {
@@ -235,17 +251,12 @@
   }
 
   .stage {
-    display: none;
-  }
-
-  .mobileStack {
-    display: grid;
-    gap: 88px;
+    min-height: auto;
     padding: 96px 20px;
   }
 
-  .reducedStack {
-    padding: 96px 20px;
+  .experienceTimeline {
+    margin-bottom: 56px;
   }
 
   .card {

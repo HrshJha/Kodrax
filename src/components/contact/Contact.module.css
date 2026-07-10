@@ -58,7 +58,6 @@
   border-bottom: 1px solid var(--contact-hairline);
   color: inherit;
   text-decoration: none;
-  transition: opacity var(--duration-xs) var(--ease-standard);
 }
 
 .linkRow::after {
@@ -71,11 +70,6 @@
   background: currentColor;
   opacity: 0;
   transition: opacity var(--duration-xs) var(--ease-standard);
-}
-
-.linkRow:hover,
-.linkRow:focus-visible {
-  opacity: 0.95;
 }
 
 .linkRow:hover::after,

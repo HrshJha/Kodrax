@@ -7,23 +7,21 @@ import styles from "./Projects.module.css";
 
 interface ProjectTimelineProps {
   activeIndex: number;
-  progress: MotionValue<number>;
+  progress: MotionValue<number> | number;
   projects: readonly ProjectCaseStudy[];
-  reduceMotion: boolean;
 }
 
 export function ProjectTimeline({
   activeIndex,
   progress,
-  projects,
-  reduceMotion
+  projects
 }: Readonly<ProjectTimelineProps>) {
   return (
     <div className={styles.timeline} aria-hidden="true">
       <div className={styles.timelineTrack}>
         <motion.div
           className={styles.timelineFill}
-          style={{ scaleY: reduceMotion ? 0 : progress }}
+          style={{ scaleY: progress }}
         />
       </div>
       <ol className={styles.timelineNodes}>
