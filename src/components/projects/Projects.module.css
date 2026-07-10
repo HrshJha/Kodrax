@@ -253,6 +253,8 @@
 }
 
 .timeline {
+  --timeline-fill-length: 502px;
+
   position: relative;
   display: flex;
   min-height: 520px;
@@ -272,11 +274,21 @@
   transform-origin: left;
 }
 
+.timelineFillAxis {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--timeline-fill-length);
+  height: 1px;
+  transform: rotate(90deg);
+  transform-origin: left top;
+}
+
 .timelineFill {
   width: 100%;
-  height: 100%;
+  height: 1px;
   background: rgb(var(--projects-accent-rgb) / 74%);
-  transform-origin: top;
+  transform-origin: left;
 }
 
 .timelineNodes {
@@ -502,6 +514,8 @@
   }
 
   .timeline {
+    --timeline-fill-length: 452px;
+
     min-height: 470px;
     width: 30px;
   }

@@ -19,10 +19,12 @@ export function ProjectTimeline({
   return (
     <div className={styles.timeline} aria-hidden="true">
       <div className={styles.timelineTrack}>
-        <motion.div
-          className={styles.timelineFill}
-          style={{ scaleY: progress }}
-        />
+        <div className={styles.timelineFillAxis}>
+          <motion.div
+            className={styles.timelineFill}
+            style={{ scaleX: progress }}
+          />
+        </div>
       </div>
       <ol className={styles.timelineNodes}>
         {projects.map((project, index) => (
