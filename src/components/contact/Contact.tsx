@@ -4,58 +4,98 @@ import { motion } from "framer-motion";
 
 import { ContactLink } from "@/components/contact/ContactLink";
 import {
+  CONTACT_CTA_HREF,
+  CONTACT_CTA_LABEL,
   CONTACT_DESCRIPTION,
   CONTACT_HEADING,
+  CONTACT_LABEL,
   CONTACT_SECTION_ID
 } from "@/components/contact/contact.constants";
 import { contactLinks } from "@/components/contact/contact.data";
 import type { ContactProps } from "@/components/contact/contact.types";
-import { Reveal, revealChildVariants } from "@/components/motion/reveal";
+import { usePrefersReducedMotion } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 import styles from "./Contact.module.css";
 
+const CONTACT_EASE = [0.33, 1, 0.68, 1] as const;
+
+const contactMotion = {
+  hidden: ({ offset }: { delay: number; offset: number }) => ({
+    opacity: 0,
+    y: offset
+  }),
+  visible: ({ delay }: { delay: number; offset: number }) => ({
+    opacity: 1,
+    transition: {
+      delay,
+      duration: 0.42,
+      ease: CONTACT_EASE
+    },
+    y: 0
+  })
+} as const;
+
 export function Contact({ className }: Readonly<ContactProps>) {
+  const shouldReduceMotion = usePrefersReducedMotion();
+  const offset = shouldReduceMotion ? 0 : 20;
+
   return (
-    <Reveal
-      amount={0.2}
+    <motion.section
       aria-labelledby="contact-heading"
-      as="section"
       className={cn(styles.contact, className)}
-      duration="M"
-      ease="primary"
       id={CONTACT_SECTION_ID}
-      translate="medium"
+      initial="hidden"
+      viewport={{ amount: 0.35, once: true }}
+      whileInView="visible"
     >
       <div className={styles.inner}>
-        <h2 className={styles.heading} id="contact-heading">
+        <motion.p
+          className={styles.label}
+          custom={{ delay: 0, offset: shouldReduceMotion ? 0 : 10 }}
+          variants={contactMotion}
+        >
+          {CONTACT_LABEL}
+        </motion.p>
+
+        <motion.h2
+          className={styles.heading}
+          custom={{ delay: 0, offset }}
+          id="contact-heading"
+          variants={contactMotion}
+        >
           {CONTACT_HEADING}
-        </h2>
+        </motion.h2>
 
-        <p className={styles.description}>
+        <motion.p
+          className={styles.description}
+          custom={{ delay: 0.12, offset }}
+          variants={contactMotion}
+        >
           {CONTACT_DESCRIPTION}
-        </p>
+        </motion.p>
 
-        <Reveal
-          amount={0.2}
-          as="div"
+        <motion.a
+          className={styles.primaryCta}
+          custom={{ delay: 0.2, offset }}
+          href={CONTACT_CTA_HREF}
+          variants={contactMotion}
+        >
+          {CONTACT_CTA_LABEL}
+        </motion.a>
+
+        <motion.div
           className={styles.links}
-          duration="S"
-          ease="primary"
-          staggerChildren="D1"
-          translate="small"
+          custom={{ delay: 0.28, offset }}
+          variants={contactMotion}
         >
           {contactLinks.map((link) => (
-            <motion.div
-              className={styles.linkMotion}
-              key={link.kind}
-              variants={revealChildVariants}
-            >
+            <div className={styles.linkMotion} key={link.kind}>
               <ContactLink link={link} />
-            </motion.div>
+            </div>
           ))}
-        </Reveal>
+        </motion.div>
       </div>
-    </Reveal>
+    </motion.section>
   );
 }

@@ -9,12 +9,11 @@
 
   position: relative;
   display: grid;
-  min-height: 90svh;
+  min-height: clamp(160px, 24svh, 260px);
   align-items: center;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(104px, 16svh, 160px) clamp(24px, 6vw, 80px)
-    clamp(132px, 18svh, 184px);
+  padding: 0 clamp(24px, 6vw, 80px) clamp(48px, 7svh, 76px);
   color: var(--footer-foreground);
   background: var(--footer-background);
 }
@@ -187,8 +186,8 @@
 
 @media (max-width: 767px) {
   .footer {
-    min-height: 86svh;
-    padding: 96px 20px 120px;
+    min-height: 180px;
+    padding: 0 20px 96px;
   }
 
   .heading {

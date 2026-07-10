@@ -1,35 +1,49 @@
 "use client";
 
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+
 import { BackToTop } from "@/components/footer/BackToTop";
-import { FooterLinks } from "@/components/footer/FooterLinks";
 import {
-  FOOTER_DESCRIPTION,
-  FOOTER_HEADING,
+  FOOTER_MOTION,
   FOOTER_SECTION_ID,
   FOOTER_WORDMARK_PATTERN
 } from "@/components/footer/footer.constants";
 import type { FooterProps } from "@/components/footer/footer.types";
+import { usePrefersReducedMotion } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 import styles from "./Footer.module.css";
 
 export function Footer({ className }: Readonly<FooterProps>) {
+  const footerRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = usePrefersReducedMotion();
+  const { scrollYProgress } = useScroll({
+    offset: ["start end", "start center"],
+    target: footerRef
+  });
+  const wordmarkOpacity = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0.03, FOOTER_MOTION.wordmarkOpacity]
+  );
+
   return (
     <footer
-      aria-labelledby="footer-heading"
+      aria-label="Portfolio closing wordmark"
       className={cn(styles.footer, className)}
       id={FOOTER_SECTION_ID}
+      ref={footerRef}
     >
-      <div className={styles.content}>
-        <h2 className={styles.heading} id="footer-heading">
-          {FOOTER_HEADING}
-        </h2>
-        <p className={styles.description}>{FOOTER_DESCRIPTION}</p>
-        <FooterLinks />
-      </div>
-
       <div aria-hidden="true" className={styles.wordmarkFrame}>
-        <div className={styles.wordmark}>
+        <motion.div
+          className={styles.wordmark}
+          style={{
+            opacity: shouldReduceMotion
+              ? FOOTER_MOTION.wordmarkOpacity
+              : wordmarkOpacity
+          }}
+        >
           <span className={styles.wordmarkTrack}>
             <span className={styles.wordmarkSequence}>
               {FOOTER_WORDMARK_PATTERN}
@@ -38,7 +52,7 @@ export function Footer({ className }: Readonly<FooterProps>) {
               {FOOTER_WORDMARK_PATTERN}
             </span>
           </span>
-        </div>
+        </motion.div>
       </div>
 
       <BackToTop />

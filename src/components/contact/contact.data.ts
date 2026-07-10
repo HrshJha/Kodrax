@@ -20,5 +20,11 @@ export const contactLinks = [
     kind: "linkedin",
     label: "LinkedIn",
     value: "linkedin.com/in/hrshjha"
+  },
+  {
+    href: "#footer",
+    kind: "resume",
+    label: "Resume",
+    value: "Resume"
   }
 ] satisfies readonly ContactLinkItem[];

@@ -16,7 +16,6 @@ export function ContactLink({ link }: Readonly<ContactLinkProps>) {
       target={link.isExternal ? "_blank" : undefined}
     >
       <span className={styles.linkLabel}>{link.label}</span>
-      <span className={styles.linkValue}>{link.value}</span>
     </a>
   );
 }

@@ -7,10 +7,6 @@ export const FOOTER_HOME_TARGET_ID = "home";
 export const FOOTER_WORDMARK_PATTERN =
   "HARSH JHA, HARSH JHA, HARSH JHA, HARSH JHA, HARSH JHA, HARSH JHA,";
 
-export const FOOTER_HEADING = "Let's Build Something Meaningful.";
-
-export const FOOTER_DESCRIPTION = "Enable collaboration.";
-
 export const FOOTER_LINKS = [
   {
     href: "mailto:jhaharsh451@gmail.com",

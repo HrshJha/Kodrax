@@ -5,59 +5,124 @@
   --contact-subtle: rgb(var(--cloud-white-rgb) / 46%);
   --contact-border: rgb(var(--cloud-white-rgb) / 12%);
   --contact-hairline: rgb(var(--cloud-white-rgb) / 8%);
+  --contact-accent: var(--accent-contact);
 
-  min-height: 100svh;
+  display: grid;
+  min-height: clamp(620px, 80svh, 820px);
+  place-items: center;
   color: var(--contact-foreground);
   background: var(--contact-background);
 }
 
 .inner {
   display: grid;
-  width: min(700px, calc(100% - 80px));
-  min-height: 100svh;
-  align-content: center;
+  justify-items: center;
+  width: min(720px, calc(100% - 80px));
   margin: 0 auto;
-  padding: 132px 0;
+  padding: clamp(96px, 12svh, 132px) 0 clamp(140px, 18svh, 180px);
+  text-align: center;
+}
+
+.label {
+  margin: 0 0 40px;
+  color: rgb(255 255 255 / 35%);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.45em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .heading {
-  max-width: 11ch;
+  max-width: 12ch;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(64px, 8vw, 112px);
-  font-weight: 520;
+  font-size: clamp(72px, 7.2vw, 96px);
+  font-weight: 700;
   line-height: 0.92;
   text-wrap: balance;
 }
 
 .description {
-  max-width: 42ch;
-  margin: 36px 0 0;
-  color: var(--contact-muted);
-  font-size: 19px;
-  line-height: 1.7;
+  max-width: 520px;
+  margin: 32px 0 0;
+  color: rgb(255 255 255 / 65%);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-wrap: balance;
+}
+
+.primaryCta {
+  position: relative;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-top: 48px;
+  color: #f5f5f5;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 220ms var(--ease-standard);
+}
+
+.primaryCta::after {
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--ease-standard);
+}
+
+.primaryCta:hover,
+.primaryCta:focus-visible {
+  color: var(--contact-accent);
+}
+
+.primaryCta:hover::after,
+.primaryCta:focus-visible::after {
+  transform: scaleX(1);
 }
 
 .links {
-  display: grid;
-  margin-top: 72px;
-  border-top: 1px solid var(--contact-hairline);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 .linkMotion {
-  will-change: transform, opacity;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.linkMotion:not(:last-child)::after {
+  margin-left: 14px;
+  color: rgb(255 255 255 / 24%);
+  content: "•";
+  font-size: 13px;
+  line-height: 1;
 }
 
 .linkRow {
   position: relative;
-  display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
-  gap: 36px;
-  min-height: 68px;
+  display: inline-flex;
+  min-height: 44px;
   align-items: center;
-  border-bottom: 1px solid var(--contact-hairline);
-  color: inherit;
+  color: rgb(255 255 255 / 42%);
   text-decoration: none;
+  transition:
+    color 220ms var(--ease-standard),
+    opacity 220ms var(--ease-standard);
 }
 
 .linkRow::after {
@@ -69,7 +134,12 @@
   content: "";
   background: currentColor;
   opacity: 0;
-  transition: opacity var(--duration-xs) var(--ease-standard);
+  transition: opacity 220ms var(--ease-standard);
+}
+
+.linkRow:hover,
+.linkRow:focus-visible {
+  color: var(--contact-accent);
 }
 
 .linkRow:hover::after,
@@ -78,49 +148,55 @@
 }
 
 .linkLabel {
-  color: var(--contact-subtle);
-  font-size: 11px;
+  color: inherit;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
-.linkValue {
-  overflow-wrap: anywhere;
-  color: var(--contact-muted);
-  font-size: 17px;
-  line-height: 1.45;
-}
-
 @media (max-width: 767px) {
+  .contact {
+    min-height: 78svh;
+  }
+
   .inner {
     width: min(100% - 40px, 520px);
-    min-height: 100svh;
-    padding: clamp(80px, 12svh, 104px) 0;
+    padding: clamp(88px, 12svh, 112px) 0 clamp(112px, 16svh, 140px);
+  }
+
+  .label {
+    margin-bottom: 32px;
+    font-size: 11px;
   }
 
   .heading {
-    max-width: 10ch;
-    font-size: 48px;
+    max-width: 11ch;
+    font-size: clamp(48px, 12vw, 58px);
   }
 
   .description {
     margin-top: 28px;
-    font-size: 16px;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .primaryCta {
+    margin-top: 40px;
   }
 
   .links {
-    margin-top: 56px;
+    gap: 12px;
+    margin-top: 34px;
   }
 
-  .linkRow {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    min-height: 76px;
-    align-content: center;
+  .linkMotion:not(:last-child)::after {
+    margin-left: 12px;
   }
 
-  .linkValue {
-    font-size: 15px;
+  .linkLabel {
+    font-size: 11px;
+    letter-spacing: 0.16em;
   }
 }
